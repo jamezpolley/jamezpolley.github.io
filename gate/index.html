@@ -1,0 +1,181 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      lang="en">
+  <HEAD>
+    <TITLE>Gate Graphite Stats</TITLE>
+
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery-visibility.min.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery-graphite.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/common.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery.flot.min.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery.flot.time.min.js"></script>
+<script type="text/javascript"
+	src="elastic-recheck.js"></script>
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
+
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
+
+    <!-- IE CSS -->
+    <!--[if lt IE 8]><link rel="stylesheet" href="http://www.openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+    <!-- OpenStack Specific CSS -->
+
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
+
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
+
+    <link rel="stylesheet" type="text/css" href="http://www.openstack.org/themes/openstack/css/main.css" />
+
+
+<style type="text/css">
+.graph {
+    width: 600px;
+    height: 200px;
+    margin-bottom: 6px;
+}
+.extlink {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+.bug-container {
+    margin-bottom: 2em;
+}
+table {
+    width: auto;
+}
+h2 {
+      padding-top: 1em;
+}
+h3 {
+    font-size: 1.1em;
+}
+</style>
+
+<script type="text/javascript">
+</script>
+
+  </HEAD>
+
+  <BODY>
+    <div class="container" id="graph-container">
+      <script type="text/javascript">
+$("#graph-container").append($(new Image()).graphite({
+    from: "-36hours",
+    url: "http://graphite.openstack.org/render/",
+    width: 800,
+    height: 500,
+    bgcolor: 'ffffff',
+    fgcolor: '000000',
+    yMax: 100,
+    yMin: 0,
+    target: [
+        graphite_moving_avg("gate", "gate-tempest-dsvm-full","orange"),
+        graphite_moving_avg("gate", "gate-grenade-dsvm","brown"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-large-ops","blue"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-neutron-large-ops","aqua"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-postgres-full","magenta"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-neutron-heat-slow","green"),
+        graphite_moving_avg("gate", "gate-grenade-dsvm-partial-ncpu","darkblue"),
+        graphite_moving_avg("gate", "gate-devstack-dsvm-cells","darkgrey"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-neutron-full","darkred"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-full-ceph","purple")
+    ],
+    title: "Gate Failure Rates (36 hours)"
+}));
+      </script>
+    </div>
+    <div class="container" id="graph-container">
+      <script type="text/javascript">
+$("#graph-container").append($(new Image()).graphite({
+    from: "-36hours",
+    url: "http://graphite.openstack.org/render/",
+    width: 800,
+    height: 300,
+    bgcolor: 'ffffff',
+    fgcolor: '000000',
+    hideGrid: true,
+    target: [
+        graphite_hit_count("gate", "gate-tempest-dsvm-full","orange"),
+        graphite_hit_count("gate", "gate-grenade-dsvm","brown"),
+        graphite_hit_count("gate", "gate-tempest-dsvm-large-ops","blue"),
+        graphite_hit_count("gate", "gate-tempest-dsvm-neutron-large-ops","aqua"),
+        graphite_hit_count("gate", "gate-tempest-dsvm-postgres-full","magenta"),
+        graphite_hit_count("gate", "gate-tempest-dsvm-neutron-heat-slow","green"),
+        graphite_hit_count("gate", "gate-grenade-dsvm-partial-ncpu","darkblue"),
+        graphite_hit_count("gate", "gate-devstack-dsvm-cells","darkgrey"),
+        graphite_hit_count("gate", "gate-tempest-dsvm-neutron-full","darkred"),
+        graphite_hit_count("gate", "gate-tempest-dsvm-full-ceph","purple")
+    ],
+    title: "Gate Hit Count (36 hours)"
+}));
+      </script>
+    </div>
+    <div class="container" id="graph-container">
+      <script type="text/javascript">
+$("#graph-container").append($(new Image()).graphite({
+    from: "-36hours",
+    url: "http://graphite.openstack.org/render/",
+    width: 800,
+    height: 500,
+    bgcolor: 'ffffff',
+    fgcolor: '000000',
+    yMax: 100,
+    yMin: 0,
+    target: [
+        graphite_moving_avg("gate", "gate-ceilometer-python27", "purple"),
+        graphite_moving_avg("gate", "gate-nova-python27","orange"),
+        graphite_moving_avg("gate", "gate-glance-python27","brown"),
+        graphite_moving_avg("gate", "gate-cinder-python27","blue"),
+        graphite_moving_avg("gate", "gate-neutron-python27","aqua"),
+        graphite_moving_avg("gate", "gate-swift-python27","magenta"),
+        graphite_moving_avg("gate", "gate-keystone-python27","green"),
+        graphite_moving_avg("gate", "gate-heat-python27","darkblue"),
+        graphite_moving_avg("gate", "gate-trove-python27","darkgreen")
+    ],
+    title: "Python27 Unit Test Gate Failure Rates (36 hours)"
+}));
+      </script>
+    </div>
+
+
+    <div class="container" id="graph-container">
+      <script type="text/javascript">
+$("#graph-container").append($(new Image()).graphite({
+    from: "-10days",
+    url: "http://graphite.openstack.org/render/",
+    width: 1200,
+    height: 500,
+    bgcolor: 'ffffff',
+    fgcolor: '000000',
+    yMax: 100,
+    yMin: 0,
+    target: [
+        graphite_moving_avg("gate", "gate-tempest-dsvm-full","orange", "36hours"),
+        graphite_moving_avg("gate", "gate-grenade-dsvm","brown", "36hours"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-large-ops","blue", "36hours"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-neutron-large-ops","aqua", "36hours"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-postgres-full","magenta", "36hours"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-neutron-heat-slow","green", "36hours"),
+        graphite_moving_avg("gate", "gate-grenade-dsvm-partial-ncpu","darkblue", "36hours"),
+        graphite_moving_avg("gate", "gate-devstack-dsvm-cells","darkgrey", "36hours"),
+        graphite_moving_avg("gate", "gate-tempest-dsvm-neutron-full","darkred", "36hours")
+    ],
+    title: "Gate Failure Rates (10 days)"
+}));
+      </script>
+    </div>
+
+  </BODY>
+</html>
