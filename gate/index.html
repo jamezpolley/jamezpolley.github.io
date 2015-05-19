@@ -72,7 +72,7 @@ h3 {
     <div class="container" id="graph-container">
       <script type="text/javascript">
 $("#graph-container").append($(new Image()).graphite({
-    from: "-36hours",
+    from: "-10days",
     url: "http://graphite.openstack.org/render/",
     width: 800,
     height: 500,
@@ -80,23 +80,26 @@ $("#graph-container").append($(new Image()).graphite({
     fgcolor: '000000',
     yMax: 100,
     yMin: 0,
+    hideLegend: false,
     target: [
-        graphite_moving_avg("gate", "gate-tempest-dsvm-full","orange"),
-        graphite_moving_avg("gate", "gate-grenade-dsvm","brown"),
-        graphite_moving_avg("gate", "gate-tempest-dsvm-large-ops","blue"),
-        graphite_moving_avg("gate", "gate-tempest-dsvm-neutron-large-ops","aqua"),
-        graphite_moving_avg("gate", "gate-tempest-dsvm-postgres-full","magenta"),
-        graphite_moving_avg("gate", "gate-tempest-dsvm-neutron-heat-slow","green"),
-        graphite_moving_avg("gate", "gate-grenade-dsvm-partial-ncpu","darkblue"),
-        graphite_moving_avg("gate", "gate-devstack-dsvm-cells","darkgrey"),
-        graphite_moving_avg("gate", "gate-tempest-dsvm-neutron-full","darkred"),
-        graphite_moving_avg("gate", "gate-tempest-dsvm-full-ceph","purple")
+        graphite_moving_avg("periodic-stable", "periodic-ceilometer-python27-juno","orange", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-cinder-python27-juno","brown", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-glance-python27-juno","blue", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-heat-python27-juno","aqua", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-horizon-python27-juno","magenta", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-ironic-python27-juno","green", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-keystone-python27-juno","darkblue", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-neutron-python27-juno","darkgrey", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-nova-python27-juno","darkred", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-oslo-incubator-python27-juno","purple", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-sahara-python27-juno","gold", "72hours"),
+        graphite_moving_avg("periodic-stable", "periodic-trove-python27-juno","rose", "72hours")
     ],
-    title: "Gate Failure Rates (36 hours)"
+    title: "Gate Failure Rates (10 days)"
 }));
       </script>
     </div>
-    <div class="container" id="graph-container">
+<!---    <div class="container" id="graph-container">
       <script type="text/javascript">
 $("#graph-container").append($(new Image()).graphite({
     from: "-36hours",
@@ -175,7 +178,7 @@ $("#graph-container").append($(new Image()).graphite({
     title: "Gate Failure Rates (10 days)"
 }));
       </script>
-    </div>
+    </div> --->
 
   </BODY>
 </html>
